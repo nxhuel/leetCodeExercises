@@ -2,10 +2,16 @@ package longestPalindromicSubstring;
 
 public class Palindromic {
     public static String longestPalindrome(String s) {
-        // case 1 (errors)
+        // case 1 (avoid mistakes)
+        s = s.replaceAll("[^a-zA-Z]", "");
+        s = s.toLowerCase();
         if (s == null || s.length() == 0) {
-            return "";
+            return "Error. La cadena esta vacia o es nula";
         }
+        if (s.matches("\\d+")) {
+            return "Error. La cadena debe contener solo letras";
+        }
+
         String current = "";
         String max = "";
         //  case 2 (individual)
@@ -39,9 +45,5 @@ public class Palindromic {
             }
         }
         return max;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(longestPalindrome("babhannah"));
     }
 }
