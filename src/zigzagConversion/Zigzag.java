@@ -1,39 +1,40 @@
 package zigzagConversion;
 
+import java.util.Arrays;
+
 public class Zigzag {
     public static String convert(String s, int numRows) {
         if (numRows == 1 || s.length() <= numRows) {
             return s;
         }
 
-        int position = 6;
-        String column = "";
-        int space = 2;
-        String blankSpace = " ".repeat(numRows - space);
+        StringBuilder[] rows = new StringBuilder[numRows];
 
-        for (int rowPosition = position; rowPosition < s.length(); rowPosition++) {
-            int reverse = rowPosition + (numRows + space);
-            while (space > 0) {
-                if (space <= numRows) {
-                    column += s.charAt(rowPosition) + blankSpace + s.charAt(reverse) + "\n";
-                }
-                if (space == numRows) {
-                    column += s.charAt(rowPosition + 1) + blankSpace + "\n";
-                }
-                space++;
-                blankSpace = " ".repeat(Math.max(0, numRows - space));
-                reverse--;
-                rowPosition++;
-
-            }
+        for (int i = 0; i < numRows; i++) {
+            rows[i] = new StringBuilder();
         }
 
-        System.out.println(column);
+        int currentRow = 0;
+        boolean goingDown = false;
 
-        return "";
+        for (char character : s.toCharArray()) {
+            rows[currentRow].append(character);
+            if (currentRow == 0 || currentRow == numRows -1) {
+                goingDown = !goingDown;
+            }
+
+            currentRow += goingDown ? 1 : -1;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (StringBuilder row : rows) {
+            result.append(row);
+        }
+
+        return result.toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(convert("PAYPALISHIRING", 4));
+        System.out.println(convert("ABCDEFGHI", 4));
     }
 }
