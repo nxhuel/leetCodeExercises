@@ -1,7 +1,5 @@
 package zigzagConversion;
 
-import java.util.Arrays;
-
 public class Zigzag {
     public static String convert(String s, int numRows) {
         if (numRows == 1 || s.length() <= numRows) {
@@ -34,7 +32,4 @@ public class Zigzag {
         return result.toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(convert("ABCDEFGHI", 4));
-    }
 }
