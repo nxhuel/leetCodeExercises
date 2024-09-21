@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class ReverseInteger {
     public static int reverse(int x) {
 //        Manejo de error: no tiene que salir del rango de 32 bits
-//        if ((Math.pow(-2, 31)) <= x || x <= ((Math.pow(2, 31) -1))) {
+//        if (x < (Math.pow(-2, 31)) || x > ((Math.pow(2, 31) -1))) {
 //            return 0;
 //        }
 //        Manejo de error: no tiene que permitir int 64 bits
@@ -17,6 +17,26 @@ public class ReverseInteger {
 
         ArrayList<Character> numDividos = new ArrayList<>();
         String conversion = String.valueOf(x);
+
+        if (x < 0) {
+//            Omitimos el signo -
+            for (int i = 1; i < conversion.length(); i++) {
+                char letra = conversion.charAt(i);
+                numDividos.add(letra);
+            }
+//            System.out.println(numDividos);
+
+            ArrayList<Integer> numInvertido = new ArrayList<>();
+
+            for (int i = numDividos.size()-1; i >= 0; i--) {
+                numInvertido.add(Character.getNumericValue(numDividos.get(i)));
+            }
+
+            String resultado = "-" + numInvertido.stream()
+                    .map(String::valueOf).collect(Collectors.joining());
+
+            return Integer.parseInt(resultado);
+        }
 
         for (int i = 0; i < conversion.length(); i++) {
             char letra = conversion.charAt(i);
