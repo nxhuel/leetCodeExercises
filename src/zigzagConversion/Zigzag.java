@@ -31,5 +31,4 @@ public class Zigzag {
 
         return result.toString();
     }
-
 }
